@@ -117,7 +117,7 @@
             <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
             <li id="liEscritorio" class="nav-item">
-              <a id="aEscritorio" href="/" class="nav-link">
+              <a id="aEscritorio" href="/dashboard" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                   Escritorio
@@ -134,21 +134,21 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a id="liUnidadMedida" href="/unidades" class="nav-link">
+                  <a id="liCategoria" href="/categoria" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Unidades</p>
+                    <p>Categoría</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a id="liCategoria" href="/categorias" class="nav-link">
+                  <a id="liUnidadMedida" href="/vehiculo" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Categorías</p>
+                    <p>Vehiculos</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a id="liProducto" href="/productos" class="nav-link">
+                  <a id="liProducto" href="/entrada" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Productos</p>
+                    <p>entradas</p>
                   </a>
                 </li>
               </ul>

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('entradas', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('placa', 15)->nullable();
-            $table->dateTime('fecha');
+            $table->dateTime('fecha_entrada');
+            $table->dateTime('fecha_salida');
             $table->timestamps();
-            
-            $table->foreign('placa')->references('placa')->on('veiculos')->onDelete('SET NULL');
+
+            $table->foreign('placa')->references('placa')->on('vehiculos')->onDelete('SET NULL');
         });
     }
 

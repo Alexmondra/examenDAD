@@ -15,12 +15,31 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 100; $i++) {
-            Categoria::create([
-                'nombre' => 'Categoria ' . Str::random(5), 
-                'imagen' => 'imagen' . $i . '.jpg', 
-                'activo' => rand(0, 1) == 1 ? true : false, 
-            ]);
+
+        $categorias = [
+            [
+                'nombre' => 'motocicletas',
+                'imagen' => 'imagen1',
+                'activo' => 1
+            ],
+            [
+                'nombre' => 'automóviles',
+                'imagen' => 'imagen2',
+                'activo' => 1
+            ],
+            [
+                'nombre' => 'bicicletas',
+                'imagen' => 'imagen3',
+                'activo' => 1
+            ]
+        ];
+
+        foreach ($categorias as $categoriaData) {
+            $categoria = new Categoria();
+            $categoria->nombre = $categoriaData['nombre'];
+            $categoria->imagen = $categoriaData['imagen'];
+            $categoria->activo = $categoriaData['activo'];
+            $categoria->save();
         }
     }
 }

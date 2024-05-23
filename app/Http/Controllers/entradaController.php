@@ -1,87 +1,68 @@
 <?php
-
 namespace App\Http\Controllers;
-use App\Models\Veiculo;
+
 use App\Models\Entrada;
+use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
-class entradaController extends Controller
+class EntradaController extends Controller
 {
     public function index(Request $request)
     {
-      
-            $texto = trim($request->get('texto'));
-            
-            $registros = entrada::where('placa','like', '%' . $texto . '%')->paginate(10);            
-            return view('entrada.index', compact('registros', 'texto'));
-        
+        $texto = trim($request->get('texto'));
+        $registros = Entrada::where('placa', 'like', '%' . $texto . '%')->paginate(10);
+        return view('entrada.index', compact('registros', 'texto'));
     }
 
-     /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $Veiculo= new Veiculo();
-        return view('veiculo.action',['categoria'=>new Veiculo()]);
+        $vehiculos = Vehiculo::all();
+        return view('entrada.action', ['entrada' => new Entrada(), 'vehiculos' => $vehiculos]);
     }
 
-    
-    public function store(CategoriaRequest $request)
+    public function store(Request $request)
     {
-        $registro = new Categoria;
-        $registro->nombre=$request->input('nombre');
-        $registro->imagen="";
-        $registro->save();
+        $entrada = new Entrada;
+        $entrada->placa = $request->input('placa');
+        $entrada->fecha_entrada = $request->input('fecha_entrada') ?: null;
+        $entrada->fecha_salida = $request->input('fecha_salida') ?: null;
+        $entrada->save();
+        
         return response()->json([
-            'status'=> 'success',
-            'message'=>'Registro creado satisfactoriamente'
+            'status' => 'success',
+            'message' => 'Registro creado satisfactoriamente'
         ]);
     }
 
-
-    public function show(Categoria $categoria)
-    {
-        return "Mostrar";
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
-        $categoria=Categoria::findOrFail($id);
-        return view('categoria.action',compact('categoria'));
+        $entrada = Entrada::findOrFail($id);
+        $vehiculos = Vehiculo::all();
+        return view('entrada.action', compact('entrada', 'vehiculos'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(CategoriaRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $categoria=Categoria::findOrFail($id);
-        $categoria->nombre=$request->nombre;
-        $categoria->save();
-
-        return response()->json([
-            'status'=> 'success',
-            'message'=> 'Actualización de datos satisfactoria'
-        ]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        $registro = Veiculo::findOrFail($id);
-        $registro->delete();
+        $entrada = Entrada::findOrFail($id);
+        $entrada->placa = $request->input('placa');
+        $entrada->fecha_entrada = $request->input('fecha_entrada') ?: $entrada->fecha_entrada;
+        $entrada->fecha_salida = $request->input('fecha_salida') ?: $entrada->fecha_salida;
+        $entrada->save();
 
         return response()->json([
             'status' => 'success',
-            'message' => $registro->nombre . ' Eliminado'
+            'message' => 'Actualización de datos satisfactoria'
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $entrada = Entrada::findOrFail($id);
+        $entrada->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Entrada eliminada satisfactoriamente'
         ]);
     }
 }
-
-

@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipo_comprobantes', function (Blueprint $table) {
+        Schema::create('vehiculos', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('codigo', 70)->required();
-            $table->string('nombre', 70);
-            $table->boolean('activo')->default(1);
+            $table->unsignedBigInteger('id_categoria')->nullable();
+            $table->string('placa', 15)->unique();
+            $table->string('modelo', 70); 
+            $table->string('propietario');
             $table->timestamps();
+            
+            $table->foreign('id_categoria')->references('id')->on('categorias')->onDelete('SET NULL');
         });
     }
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo_comprobantes');
+        Schema::dropIfExists('vehiculos');
     }
 };

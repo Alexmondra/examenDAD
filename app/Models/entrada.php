@@ -12,7 +12,8 @@ class entrada extends Model
     
     protected $fillable = [
         'placa',
-        'fecha',
+        'fecha_entrada',
+        'fecha_salida',
        
     ];
 }

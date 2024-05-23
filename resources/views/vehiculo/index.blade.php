@@ -9,12 +9,12 @@
             <div class="col-lg-12">
               <div class="card">
                 <div class="card-header">
-                  <h5 class="m-0">veiculos <button class="btn btn-primary" onclick="nuevo()"><i class="fas fa-file"></i> Nuevo</button> <a href=""
+                  <h5 class="m-0">vehiculos <button class="btn btn-primary" onclick="nuevo()"><i class="fas fa-file"></i> Nuevo</button> <a href=""
                       class="btn btn-success"><i class="fas fa-file-csv"></i> CSV</a></h5>
                 </div>
                 <div class="card-body">
                   <div>
-                    <form action="{{route('veiculo.index')}}" method="get">
+                    <form action="{{route('vehiculo.index')}}" method="get">
                       <div class="input-group">
                           <input name="texto" type="text" class="form-control" value="{{$texto}}">
                           <div class="input-group-append">
@@ -84,7 +84,7 @@
     function nuevo(){
       $.ajax({
             method: 'get',
-            url: `{{url('veiculo/create')}}`,
+            url: `{{url('vehiculo/create')}}`,
             success: function(res){
               $('#modal-update').find('.modal-dialog').html(res);
               $("#textoBoton").text("Guardar");
@@ -96,7 +96,7 @@
     function editar(id){
       $.ajax({
             method: 'get',
-            url: `{{url('veiculo')}}/${id}/edit`,
+            url: `{{url('vehiculo')}}/${id}/edit`,
             success: function(res){
               $('#modal-update').find('.modal-dialog').html(res);
               $("#textoBoton").text("Actualizar");
@@ -158,7 +158,7 @@
               if (result.isConfirmed) {
                 $.ajax({
                     method: 'DELETE',
-                    url: `{{url('veiculo')}}/${id}`,
+                    url: `{{url('vehiculo')}}/${id}`,
                     headers:{
                       'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
                     },

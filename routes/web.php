@@ -3,8 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\VeiculosController;
-use App\Http\Controllers\entradaController;
+use App\Http\Controllers\VehiculosController;
+use App\Http\Controllers\EntradaController;
 
 
 
@@ -14,13 +14,13 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('categoria', CategoriaController::class);
-    Route::resource('veiculo', VeiculosController::class);
-    Route::resource('entrada', entradaController::class);
+    Route::resource('vehiculo', VehiculosController::class);
+    Route::resource('entrada', EntradaController::class);
 
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.main');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
